@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="toolBar_color">#36c9fb</color>
+    <color name="press_white_color">#55ffffff</color>
+    <color name="indicator_color">#36C9FB</color>
+    <color name="white_color">#fff</color>
+    <color name="layout_pressed">#d9d9d9</color>
+</resources>

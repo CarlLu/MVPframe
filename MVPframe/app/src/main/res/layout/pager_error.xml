@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/msg_network"/>
+
+        <TextView
+            android:textColor="#666666"
+            android:textSize="14dip"
+            android:layout_marginTop="15dip"
+            android:text="当前网络不太顺畅"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/pager_error_loadingAgain"
+            android:layout_marginTop="13dip"
+            android:background="@drawable/net_error_loading_selector"
+            android:layout_width="112dip"
+            android:layout_height="32dip"/>
+    </LinearLayout>
+</FrameLayout>

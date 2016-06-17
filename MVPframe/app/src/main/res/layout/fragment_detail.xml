@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:MVPframe="http://schemas.android.com/apk/res-auto"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_color"
+              android:orientation="vertical">
+
+    <!--头部分-->
+    <android.support.v7.widget.Toolbar
+        android:background="@color/toolBar_color"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"/>
+
+    <!--教师的信息部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dip"
+        android:background="@color/toolBar_color"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <!--头像-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:background="@mipmap/def_user"
+            android:id="@+id/civ_detail_teacher_icon"
+            android:layout_width="90dip"
+            android:layout_height="90dip"
+            MVPframe:civ_border_color="#cbeaff"
+            MVPframe:civ_border_width="2dip"/>
+
+        <!--姓名-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_detail_teacher_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white_color"
+                android:textSize="16dip"/>
+
+            <ImageView
+                android:id="@+id/iv_detail_teacher_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"/>
+        </LinearLayout>
+        <!--教龄-->
+        <TextView
+            android:id="@+id/tv_detail_teacher_workAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dip"
+            android:textColor="@color/white_color"
+            android:textSize="15dip"/>
+
+        <!--擅长-->
+        <TextView
+            android:id="@+id/tv_detail_teacher_hobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dip"
+            android:textColor="@color/white_color"
+            android:textSize="15dip"/>
+    </LinearLayout>
+
+    <!--下面展示内容的部分-->
+    <FrameLayout
+        android:id="@+id/fl_detail_teacher_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dip"/>
+</LinearLayout>
