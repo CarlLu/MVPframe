@@ -14,7 +14,7 @@ public class EvaluateFragment extends
     @Override
     protected void fitDates(BaseViewHolder helper, EvaluateEntity.ScoreEntity item) {
         helper.setText(R.id.tv_evaluate_item_name, item.getName()).setImageUrl(
-                R.id.civ_detail_evaluate_item_icon, this,
+                R.id.civ_detail_evaluate_item_icon, mContext,
                 Constants.BASE_URL + item.getPic()).setRating(
                 R.id.rb_detail_evaluate_item_ratingbar,
                 (float) (Math.ceil(item.getScore()) / 2)).setText(
