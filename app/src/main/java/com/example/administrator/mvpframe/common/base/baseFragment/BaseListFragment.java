@@ -123,6 +123,9 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
 
     @Override
     public void showRefreshFinish(List score) {
+        if(mRecyclerView == null){
+            mRecyclerView = ButterKnife.findById(mRootView, R.id.recycleView);
+        }
         mRecyclerView.setRefreshing(false);
         mAdapter.setNewData(score);
     }
