@@ -10,4 +10,8 @@
     <color name="indicator_color">#36C9FB</color>
     <color name="white_color">#fff</color>
     <color name="layout_pressed">#d9d9d9</color>
+    <color name="holo_red_light">#ffff4444</color>
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_orange_light">#ffffbb33</color>
 </resources>

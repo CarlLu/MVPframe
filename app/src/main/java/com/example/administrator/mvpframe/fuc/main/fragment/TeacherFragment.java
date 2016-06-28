@@ -15,7 +15,7 @@ public class TeacherFragment extends BaseListFragment<TeacherPresenter, TeacherE
     @Override
     protected void fitDates(BaseViewHolder helper, TeacherEntity item) {
         helper.setText(R.id.tv_detail_teacher_item_name, item.getName()).setImageUrl(
-                R.id.civ_detail_teacher_item_icon, Constants.BASE_URL+item.getPic()).setImageResource(R.id.iv_detail_teacher_item_sex,
+                R.id.civ_detail_teacher_item_icon,this, Constants.BASE_URL+item.getPic()).setImageResource(R.id.iv_detail_teacher_item_sex,
                 item.getSex() == 0 ? R.mipmap.ic_male : R.mipmap.ic_female).setText(
                 R.id.tv_detail_teacher_item_age, item.getSeniorityName() + "教龄").setText(
                 R.id.tv_detail_teacher_item_hobby, "擅长：" + item.getSpecialty());
@@ -39,5 +39,20 @@ public class TeacherFragment extends BaseListFragment<TeacherPresenter, TeacherE
         if(null != activity){
             activity.toDetail(item);
         }
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        PAGE = PAGE +1;
+        params.put("mechanismId", "1");
+        params.put("pageNum", PAGE + "");
+        mPresenter.loadMore(params);
+    }
+
+    @Override
+    public void onRefresh() {
+        params.put("mechanismId", "1");
+        params.put("pageNum", "1");
+        mPresenter.onRefresh(params);
     }
 }

@@ -17,12 +17,22 @@ public class EvaluatePresenter extends BasePresenter {
     }
 
     @Override
-    protected void onSuccess(Object o) {
+    protected void onAllSuccess(Object o) {
         EvaluateEntity entity = (EvaluateEntity) o;
         if (null != entity.getScore() && entity.getScore().size() > 0) {
-            mMainView.showFinishDates(entity.getScore());
+            if (mode == RequestMode.FRIST) {
+                mMainView.showFinishDates(entity.getScore());
+            } else if (mode == RequestMode.LOAD_MORE) {
+                mMainView.loadMoreFinish(entity.getScore());
+            } else if (mode == RequestMode.REFRESH) {
+                mMainView.showRefreshFinish(entity.getScore());
+            }
         } else {
-            mMainView.showEmptyView(null);
+            if (mode == RequestMode.LOAD_MORE) {
+                mMainView.hasNoMoreDate();
+            } else {
+                mMainView.showEmptyView(null);
+            }
         }
     }
 
@@ -33,6 +43,6 @@ public class EvaluatePresenter extends BasePresenter {
 
     @Override
     protected Observable getObservable(Map<String, String> params) {
-        return getService().getEvaluateList("1", "1");
+        return getService().getEvaluateList(params);
     }
 }

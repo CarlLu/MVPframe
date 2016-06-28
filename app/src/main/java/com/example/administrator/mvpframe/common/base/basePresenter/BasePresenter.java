@@ -20,8 +20,14 @@ public abstract class BasePresenter {
 
     Subscription mSubscription;
 
+    protected RequestMode mode = RequestMode.FRIST;
+
     public BasePresenter() {
         MVPframeApplication.getComponent().inject(this);
+    }
+
+    public enum RequestMode {
+        FRIST, LOAD_MORE, REFRESH;
     }
 
     @SuppressWarnings("unchecked")
@@ -45,7 +51,7 @@ public abstract class BasePresenter {
             @Override
             public void onNext(Object o) {
                 if (null != o) {
-                    onSuccess(o);
+                    onAllSuccess(o);
                 } else {
                     onFail();
                 }
@@ -53,19 +59,29 @@ public abstract class BasePresenter {
         });
     }
 
+    protected void onAllSuccess(Object o) {
+    }
+
     protected ConnectService getService() {
         return mService;
     }
 
-    private void onFinish() {
+    protected void onFinish() {
 
     }
-
-    protected abstract void onSuccess(Object o);
-
 
     protected abstract void onFail();
 
 
     protected abstract Observable getObservable(Map<String, String> params);
+
+    public void loadMore(Map<String, String> params) {
+        requestDate(params);
+        mode = RequestMode.LOAD_MORE;
+    }
+
+    public void onRefresh(Map<String, String> params) {
+        requestDate(params);
+        mode = RequestMode.REFRESH;
+    }
 }

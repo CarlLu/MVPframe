@@ -14,7 +14,7 @@ public class EvaluateFragment extends
     @Override
     protected void fitDates(BaseViewHolder helper, EvaluateEntity.ScoreEntity item) {
         helper.setText(R.id.tv_evaluate_item_name, item.getName()).setImageUrl(
-                R.id.civ_detail_evaluate_item_icon,
+                R.id.civ_detail_evaluate_item_icon, this,
                 Constants.BASE_URL + item.getPic()).setRating(
                 R.id.rb_detail_evaluate_item_ratingbar,
                 (float) (Math.ceil(item.getScore()) / 2)).setText(
@@ -30,5 +30,20 @@ public class EvaluateFragment extends
     @Override
     protected EvaluatePresenter getChildPresenter() {
         return new EvaluatePresenter(this);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        PAGE = PAGE +1;
+        params.put("mechanismId", "1");
+        params.put("pageNum", PAGE + "");
+        mPresenter.loadMore(params);
+    }
+
+    @Override
+    public void onRefresh() {
+        params.put("mechanismId", "1");
+        params.put("pageNum", "1");
+        mPresenter.onRefresh(params);
     }
 }

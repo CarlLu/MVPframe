@@ -6,24 +6,6 @@ import java.util.List;
 
 public class EvaluateEntity extends BaseEntity {
 
-    /**
-     * content : 不错
-     * createDate : 1447050018000
-     * diet : 8.0
-     * environment : 7.0
-     * id : 1
-     * mechanismID : 1
-     * name : 黄盖
-     * phone : 13590483214
-     * pic : /upload/image/2015/20151113/201511131425312352.jpg
-     * relation : 姑妈
-     * score : 7.0
-     * stay : 9.0
-     * studentName : 张梅
-     * teacher : 6.0
-     * userID : 2
-     */
-
     private List<ScoreEntity> score;
 
     public void setScore(List<ScoreEntity> score) {

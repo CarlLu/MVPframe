@@ -19,7 +19,7 @@ public class DetailPresenter extends BasePresenter {
     }
 
     @Override
-    protected void onSuccess(Object o) {
+    protected void onAllSuccess(Object o) {
         TeacherInfoEntity entity = (TeacherInfoEntity) o;
         if(entity.getTeacher() != null){
             if(!TextUtils.isEmpty(entity.getTeacher().getContent())){

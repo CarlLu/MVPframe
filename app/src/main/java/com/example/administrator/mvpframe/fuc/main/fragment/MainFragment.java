@@ -7,6 +7,8 @@ import com.example.administrator.mvpframe.common.base.baseAdapter.BaseFragmentPa
 import com.example.administrator.mvpframe.common.base.baseFragment.BaseFragment;
 import com.example.administrator.mvpframe.common.widget.PagerSlidingTabStrip;
 
+import java.util.List;
+
 import butterknife.Bind;
 
 public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
@@ -56,6 +58,21 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void hasNoMoreDate() {
+
+    }
+
+    @Override
+    public void loadMoreFinish(List dates) {
+
+    }
+
+    @Override
+    public void showRefreshFinish(List score) {
 
     }
 }

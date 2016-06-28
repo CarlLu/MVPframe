@@ -27,9 +27,9 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements
         BaseView {
 
-    protected Activity mContext;                                                                    //宿主activity
+    protected Activity mContext;
 
-    protected VaryViewHelperController mVaryViewHelperController;                                     //视图加载控制器
+    protected VaryViewHelperController mVaryViewHelperController;
 
     protected Toolbar mToolbar;
 

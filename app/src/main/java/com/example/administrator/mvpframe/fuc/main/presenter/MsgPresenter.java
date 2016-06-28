@@ -17,16 +17,30 @@ public class MsgPresenter extends BasePresenter {
     }
 
     @Override
-    protected void onSuccess(Object o) {
+    protected void onAllSuccess(Object o) {
         NewsEntity entity = (NewsEntity) o;
         if (entity.getPages() != null) {
             if (entity.getPages().getPage() != null && entity.getPages().getPage().size() > 0) {
-                mMainView.showFinishDates(entity.getPages().getPage());
+                if(mode == RequestMode.FRIST){
+                    mMainView.showFinishDates(entity.getPages().getPage());
+                }else if(mode == RequestMode.LOAD_MORE){
+                    mMainView.loadMoreFinish(entity.getPages().getPage());
+                }else if(mode == RequestMode.REFRESH){
+                    mMainView.showRefreshFinish(entity.getPages().getPage());
+                }
             } else {
-                mMainView.showEmptyView(null);
+                if(mode == RequestMode.LOAD_MORE){
+                    mMainView.hasNoMoreDate();
+                }else{
+                    mMainView.showEmptyView(null);
+                }
             }
         } else {
-            mMainView.showEmptyView(null);
+            if(mode == RequestMode.LOAD_MORE){
+                mMainView.hasNoMoreDate();
+            }else{
+                mMainView.showEmptyView(null);
+            }
         }
     }
 
@@ -37,6 +51,6 @@ public class MsgPresenter extends BasePresenter {
 
     @Override
     protected Observable getObservable(Map<String, String> params) {
-        return getService().getNewsList("0", "0", "112", "1");
+        return getService().getNewsList(params);
     }
 }

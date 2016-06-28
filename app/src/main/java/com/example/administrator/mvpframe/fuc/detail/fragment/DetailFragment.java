@@ -16,6 +16,7 @@ import com.example.administrator.mvpframe.fuc.main.activity.MainActivity;
 import com.example.administrator.mvpframe.fuc.main.entity.TeacherEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -112,5 +113,20 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
         refreshView();
         Log.d("DetailFragment", content);
         mContentView.setText(content);
+    }
+
+    @Override
+    public void hasNoMoreDate() {
+
+    }
+
+    @Override
+    public void loadMoreFinish(List dates) {
+
+    }
+
+    @Override
+    public void showRefreshFinish(List score) {
+
     }
 }

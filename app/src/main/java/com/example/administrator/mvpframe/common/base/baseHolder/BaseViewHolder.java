@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
 import android.util.SparseArray;
@@ -21,7 +22,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.example.administrator.mvpframe.common.base.baseAdapter.BaseQuickAdapter;
 
 
@@ -29,23 +29,19 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     private final SparseArray<View> views;
 
-    private final Context context;
-
     public View convertView;
 
     Object associatedObject;
 
 
-    public BaseViewHolder(Context context, View view) {
+    public BaseViewHolder(View view) {
         super(view);
-        this.context = context;
-        this.views = new SparseArray<View>();
+        this.views = new SparseArray<>();
         convertView = view;
 
     }
 
     public View getConvertView() {
-
         return convertView;
     }
 
@@ -57,7 +53,19 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public BaseViewHolder setImageResource(int viewId, int imageResId) {
         ImageView view = getView(viewId);
-        Glide.with(context).load(imageResId).into(view);
+        view.setImageResource(imageResId);
+        return this;
+    }
+
+    public BaseViewHolder setImageUrl(int viewId,Context context,String url){
+        ImageView view = getView(viewId);
+        Glide.with(context).load(url).into(view);
+        return this;
+    }
+
+    public BaseViewHolder setImageUrl(int viewId, Fragment context, String url){
+        ImageView view = getView(viewId);
+        Glide.with(context).load(url).into(view);
         return this;
     }
 
@@ -79,34 +87,9 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public BaseViewHolder setTextColorRes(int viewId, int textColorRes) {
-        TextView view = getView(viewId);
-        view.setTextColor(context.getResources().getColor(textColorRes));
-        return this;
-    }
-
     public BaseViewHolder setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);
-        return this;
-    }
-
-    public BaseViewHolder setImageUrl(int viewId, String imageUrl) {
-        ImageView view = getView(viewId);
-        Glide.with(context).load(imageUrl).crossFade().into(view);
-        return this;
-    }
-
-    public BaseViewHolder setImageUrl(int viewId, String imageUrl, int defResourceId) {
-        ImageView view = getView(viewId);
-        Glide.with(context).load(imageUrl).crossFade().placeholder(defResourceId).into(view);
-        return this;
-    }
-
-    public BaseViewHolder setImageUrl(int viewId, String imageUrl, int defResourceId, BitmapTransformation... transformations) {
-        ImageView view = getView(viewId);
-        Glide.with(context).load(imageUrl).crossFade().placeholder(defResourceId).transform(
-                transformations).into(view);
         return this;
     }
 
@@ -198,7 +181,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public BaseViewHolder setOnClickListener(int viewId, BaseQuickAdapter.OnItemChildClickListener listener) {
         View view = getView(viewId);
-        listener.position = getAdapterPosition();
+        listener.mViewHolder = this;
         view.setOnClickListener(listener);
         return this;
     }

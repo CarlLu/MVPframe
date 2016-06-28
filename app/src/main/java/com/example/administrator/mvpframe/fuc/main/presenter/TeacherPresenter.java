@@ -17,13 +17,22 @@ public class TeacherPresenter extends BasePresenter {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void onSuccess(Object o) {
+    protected void onAllSuccess(Object o) {
         MainTeacherEntity entity = (MainTeacherEntity) o;
         if (null != entity.getTeacher() && entity.getTeacher().size() > 0) {
-            mMainView.showFinishDates(entity.getTeacher());
+            if (mode == RequestMode.FRIST) {
+                mMainView.showFinishDates(entity.getTeacher());
+            } else if (mode == RequestMode.LOAD_MORE) {
+                mMainView.loadMoreFinish(entity.getTeacher());
+            } else if (mode == RequestMode.REFRESH) {
+                mMainView.showRefreshFinish(entity.getTeacher());
+            }
         } else {
-            mMainView.showEmptyView(null);
+            if (mode == RequestMode.LOAD_MORE) {
+                mMainView.hasNoMoreDate();
+            } else {
+                mMainView.showEmptyView(null);
+            }
         }
     }
 
@@ -34,7 +43,7 @@ public class TeacherPresenter extends BasePresenter {
 
     @Override
     protected Observable getObservable(Map<String, String> params) {
-        return getService().getTeacherList("1", "1");
+        return getService().getTeacherList(params);
     }
 
 }

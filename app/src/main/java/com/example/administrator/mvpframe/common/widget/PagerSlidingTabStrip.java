@@ -218,7 +218,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
                 currentPosition = pager.getCurrentItem ();
                 scrollToChild (currentPosition, 0);
 
-                //判断如果单viewpager不能为空的时候就手动刷新数据
                 if(delegatePageListener != null){
                     delegatePageListener.onPageSelected(currentPosition);
                 }
@@ -271,9 +270,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
                 TextView tab = (TextView) v;
                 tab.setTextSize (TypedValue.COMPLEX_UNIT_PX, tabTextSize);
-                //加粗字体
-//                tab.setTypeface(tabTypeface, tabTypefaceStyle);
-                //获取当前选中的条目，设置为蓝色
                 if (pager.getCurrentItem () == i) {
                     tab.setTextColor (tabSelectedColor);
                 } else {
