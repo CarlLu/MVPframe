@@ -17,4 +17,6 @@ public interface BaseView {
     void loadMoreFinish(List dates);
 
     void showRefreshFinish(List score);
+
+    void showToastError();
 }

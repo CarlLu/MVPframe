@@ -31,19 +31,4 @@ public class EvaluateFragment extends
     protected EvaluatePresenter getChildPresenter() {
         return new EvaluatePresenter(this);
     }
-
-    @Override
-    public void onLoadMoreRequested() {
-        PAGE = PAGE +1;
-        params.put("mechanismId", "1");
-        params.put("pageNum", PAGE + "");
-        mPresenter.loadMore(params);
-    }
-
-    @Override
-    public void onRefresh() {
-        params.put("mechanismId", "1");
-        params.put("pageNum", "1");
-        mPresenter.onRefresh(params);
-    }
 }

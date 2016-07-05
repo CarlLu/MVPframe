@@ -27,15 +27,16 @@ public abstract class BasePresenter {
     }
 
     public enum RequestMode {
-        FRIST, LOAD_MORE, REFRESH;
+        FRIST, LOAD_MORE, REFRESH
     }
 
     @SuppressWarnings("unchecked")
-    public void requestDate(Map<String, String> params) {
+    public void requestDate(Map<String, String> params, RequestMode mode) {
         if (null == getObservable(params)) {
             throw new IllegalArgumentException("no Observable");
         }
 
+        this.mode = mode;
         mSubscription = getObservable(params).subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe(new Subscriber() {
             @Override
@@ -74,14 +75,4 @@ public abstract class BasePresenter {
 
 
     protected abstract Observable getObservable(Map<String, String> params);
-
-    public void loadMore(Map<String, String> params) {
-        requestDate(params);
-        mode = RequestMode.LOAD_MORE;
-    }
-
-    public void onRefresh(Map<String, String> params) {
-        requestDate(params);
-        mode = RequestMode.REFRESH;
-    }
 }

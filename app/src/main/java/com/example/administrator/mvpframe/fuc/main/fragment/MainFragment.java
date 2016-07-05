@@ -75,4 +75,9 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     public void showRefreshFinish(List score) {
 
     }
+
+    @Override
+    public void showToastError() {
+
+    }
 }

@@ -22,7 +22,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.administrator.mvpframe.common.base.baseAdapter.BaseQuickAdapter;
 
 
 public class BaseViewHolder extends RecyclerView.ViewHolder {
@@ -175,13 +174,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public BaseViewHolder setOnClickListener(int viewId, View.OnClickListener listener) {
         View view = getView(viewId);
-        view.setOnClickListener(listener);
-        return this;
-    }
-
-    public BaseViewHolder setOnClickListener(int viewId, BaseQuickAdapter.OnItemChildClickListener listener) {
-        View view = getView(viewId);
-        listener.mViewHolder = this;
         view.setOnClickListener(listener);
         return this;
     }

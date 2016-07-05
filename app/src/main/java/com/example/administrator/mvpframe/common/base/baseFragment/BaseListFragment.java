@@ -1,32 +1,29 @@
 package com.example.administrator.mvpframe.common.base.baseFragment;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.administrator.mvpframe.R;
-import com.example.administrator.mvpframe.common.base.baseAdapter.BaseQuickAdapter;
+import com.example.administrator.mvpframe.common.base.baseAdapter.RecycleViewAdapter;
 import com.example.administrator.mvpframe.common.base.baseHolder.BaseViewHolder;
 import com.example.administrator.mvpframe.common.base.basePresenter.BasePresenter;
-import com.example.administrator.mvpframe.common.widget.RefreshRecylerView;
+import com.example.administrator.mvpframe.common.refresh.ProgressStyle;
+import com.example.administrator.mvpframe.common.refresh.XRecyclerView;
 import com.example.administrator.mvpframe.fuc.main.view.MainView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 
 public abstract class BaseListFragment<T extends BasePresenter, K> extends
         BaseFragment<T> implements
-        MainView<K>, BaseQuickAdapter.RequestLoadMoreListener,
-        SwipeRefreshLayout.OnRefreshListener {
+        MainView<K>, XRecyclerView.LoadingListener {
 
-    @Bind(R.id.recycleView) RefreshRecylerView mRecyclerView;
+    XRecyclerView mRecyclerView;
 
-    protected BaseQuickAdapter<K> mAdapter;
+    protected RecycleViewAdapter<K> mAdapter;
 
     protected Map<String, String> params;
 
@@ -41,19 +38,19 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
     protected void baseInit() {
         params = new HashMap<>();
         showLoading();
-        setMapDates();
-        mPresenter.requestDate(params);
+        mPresenter.requestDate(getRequestParams(), BasePresenter.RequestMode.FRIST);
     }
 
-    private Map<String, String> setMapDates() {
-        params.put("mechanismId", "1");
-        params.put("pageNum", "1");
-        return params;
+    @Override
+    protected void baseInitView() {
+        mRecyclerView = (XRecyclerView) mRootView.findViewById(R.id.recycleView);
     }
 
     @Override
     protected Map<String, String> getRequestParams() {
-        return setMapDates();
+        params.put("mechanismId", "1");
+        params.put("pageNum", PAGE + "");
+        return params;
     }
 
     @Override
@@ -66,33 +63,35 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
     public void showFinishDates(List<K> dates) {
         refreshView();
         if (mAdapter == null) {
-            mAdapter = new BaseQuickAdapter<K>(getItemLayout(), dates) {
+            mAdapter = new RecycleViewAdapter<K>(getItemLayout(), dates) {
                 @Override
                 protected void convert(BaseViewHolder helper, K item) {
                     fitDates(helper, item);
                 }
             };
 
-            if (mRecyclerView == null) {
-                mRecyclerView = ButterKnife.findById(mRootView, R.id.recycleView);
-            }
-
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-            mAdapter.openLoadAnimation();
+            mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+            mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+            mRecyclerView.setArrowImageView(R.mipmap.iconfont_downgrey);
+            mRecyclerView.setLoadingListener(this);
             mRecyclerView.setAdapter(mAdapter);
-            mAdapter.setOnLoadMoreListener(this);
-            mAdapter.openLoadMore(8, true);
-
-            mRecyclerView.setOnRefreshListener(this);
         } else {
             mAdapter.notifyDataSetChanged();
         }
-        mAdapter.setOnRecyclerViewItemClickListener(
-                (View v, int position) -> onItemClick(v, position));
+        mAdapter.setOnRecyclerViewItemChildClickListener(
+                (RecycleViewAdapter adapter, View v,int position) -> onItemClick(v,position));
     }
 
     protected void onItemClick(View v, int position) {
 
+    }
+
+    @Override
+    public void hasNoMoreDate() {
+        mRecyclerView.loadMoreComplete();
+        PAGE = PAGE - 1;
+        Toast.makeText(mContext, "没有更多数据", Toast.LENGTH_SHORT).show();
     }
 
     protected abstract void fitDates(BaseViewHolder helper, K item);
@@ -100,33 +99,33 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
     protected abstract int getItemLayout();
 
     @Override
-    public void onLoadMoreRequested() {
-
-    }
-
-    @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    public void hasNoMoreDate() {
-        mAdapter.notifyDataChangedAfterLoadMore(false);
-        View view = View.inflate(mContext, R.layout.not_loading, null);
-        mAdapter.addFooterView(view);
-    }
-
-    @Override
     public void loadMoreFinish(List dates) {
-        mAdapter.notifyDataChangedAfterLoadMore(dates, true);
+        mRecyclerView.loadMoreComplete();
+        mAdapter.addDataAndNotify(dates);
     }
 
     @Override
     public void showRefreshFinish(List score) {
-        if(mRecyclerView == null){
-            mRecyclerView = ButterKnife.findById(mRootView, R.id.recycleView);
-        }
-        mRecyclerView.setRefreshing(false);
+        mRecyclerView.refreshComplete();
         mAdapter.setNewData(score);
+    }
+
+    @Override
+    public void showToastError() {
+        mRecyclerView.reset();
+        PAGE = PAGE - 1;
+        Toast.makeText(mContext, "网络环境不好", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRefresh() {
+        PAGE = 1;
+        mPresenter.requestDate(getRequestParams(), BasePresenter.RequestMode.REFRESH);
+    }
+
+    @Override
+    public void onLoadMore() {
+        PAGE = PAGE + 1;
+        mPresenter.requestDate(getRequestParams(), BasePresenter.RequestMode.LOAD_MORE);
     }
 }

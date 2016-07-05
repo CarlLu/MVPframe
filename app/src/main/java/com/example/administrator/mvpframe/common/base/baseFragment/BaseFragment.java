@@ -50,6 +50,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (null == mRootView) {
             mRootView = inflater.inflate(getContentLayout(), container, false);
+            baseInitView();
             ButterKnife.bind(this, mRootView);
             mToolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
             if (null != getLoadingTargetView()) {
@@ -68,6 +69,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
             }
         }
         return mRootView;
+    }
+
+    protected void baseInitView() {
+
     }
 
     protected void baseInit() {
@@ -158,7 +163,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         }
         mVaryViewHelperController.showNetworkError(v -> {
             showLoading();
-            mPresenter.requestDate(getRequestParams());
+            mPresenter.requestDate(getRequestParams(), BasePresenter.RequestMode.FRIST);
         });
     }
 

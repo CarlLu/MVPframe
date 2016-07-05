@@ -38,7 +38,11 @@ public class TeacherPresenter extends BasePresenter {
 
     @Override
     protected void onFail() {
-        mMainView.showNetError();
+        if(mode == RequestMode.FRIST){
+            mMainView.showNetError();
+        }else{
+            mMainView.showToastError();
+        }
     }
 
     @Override

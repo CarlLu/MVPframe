@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.mvpframe.R;
 import com.example.administrator.mvpframe.common.base.baseFragment.BaseFragment;
+import com.example.administrator.mvpframe.common.base.basePresenter.BasePresenter;
 import com.example.administrator.mvpframe.common.config.Constants;
 import com.example.administrator.mvpframe.fuc.detail.presenter.DetailPresenter;
 import com.example.administrator.mvpframe.fuc.detail.view.DetailView;
@@ -80,7 +81,7 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
 
         showLoading();
         mParams.put("teacherId", item.getId() + "");
-        mPresenter.requestDate(mParams);
+        mPresenter.requestDate(mParams, BasePresenter.RequestMode.FRIST);
     }
 
     @Override
@@ -104,14 +105,13 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
 
         mVaryViewHelperController.showNetworkError(v -> {
             showLoading();
-            mPresenter.requestDate(mParams);
+            mPresenter.requestDate(mParams, BasePresenter.RequestMode.FRIST);
         });
     }
 
     @Override
     public void showContent(String content) {
         refreshView();
-        Log.d("DetailFragment", content);
         mContentView.setText(content);
     }
 
@@ -127,6 +127,11 @@ public class DetailFragment extends BaseFragment<DetailPresenter> implements Det
 
     @Override
     public void showRefreshFinish(List score) {
+
+    }
+
+    @Override
+    public void showToastError() {
 
     }
 }

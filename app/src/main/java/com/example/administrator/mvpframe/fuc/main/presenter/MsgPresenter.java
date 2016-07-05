@@ -21,24 +21,24 @@ public class MsgPresenter extends BasePresenter {
         NewsEntity entity = (NewsEntity) o;
         if (entity.getPages() != null) {
             if (entity.getPages().getPage() != null && entity.getPages().getPage().size() > 0) {
-                if(mode == RequestMode.FRIST){
+                if (mode == RequestMode.FRIST) {
                     mMainView.showFinishDates(entity.getPages().getPage());
-                }else if(mode == RequestMode.LOAD_MORE){
+                } else if (mode == RequestMode.LOAD_MORE) {
                     mMainView.loadMoreFinish(entity.getPages().getPage());
-                }else if(mode == RequestMode.REFRESH){
+                } else if (mode == RequestMode.REFRESH) {
                     mMainView.showRefreshFinish(entity.getPages().getPage());
                 }
             } else {
-                if(mode == RequestMode.LOAD_MORE){
+                if (mode == RequestMode.LOAD_MORE) {
                     mMainView.hasNoMoreDate();
-                }else{
+                } else {
                     mMainView.showEmptyView(null);
                 }
             }
         } else {
-            if(mode == RequestMode.LOAD_MORE){
+            if (mode == RequestMode.LOAD_MORE) {
                 mMainView.hasNoMoreDate();
-            }else{
+            } else {
                 mMainView.showEmptyView(null);
             }
         }
@@ -46,7 +46,11 @@ public class MsgPresenter extends BasePresenter {
 
     @Override
     protected void onFail() {
-        mMainView.showNetError();
+        if (mode == RequestMode.FRIST) {
+            mMainView.showNetError();
+        } else {
+            mMainView.showToastError();
+        }
     }
 
     @Override

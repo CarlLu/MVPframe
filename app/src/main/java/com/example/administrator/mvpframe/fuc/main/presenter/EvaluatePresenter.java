@@ -38,7 +38,11 @@ public class EvaluatePresenter extends BasePresenter {
 
     @Override
     protected void onFail() {
-        mMainView.showNetError();
+        if(mode == RequestMode.FRIST){
+            mMainView.showNetError();
+        }else{
+            mMainView.showToastError();
+        }
     }
 
     @Override
