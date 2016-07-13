@@ -13,7 +13,7 @@ public class BaseFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private String[] mTabs;
 
-    public BaseFragmentPagerAdapter(FragmentManager fm,
+    private BaseFragmentPagerAdapter(FragmentManager fm,
                                     List<? extends Fragment> fragments,
                                     String[] tabs) {
         super(fm);

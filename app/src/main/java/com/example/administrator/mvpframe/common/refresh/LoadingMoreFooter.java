@@ -35,10 +35,10 @@ public class LoadingMoreFooter extends LinearLayout {
 		super(context, attrs);
 		initView();
 	}
-    public void initView(){
+    private void initView(){
         setGravity(Gravity.CENTER);
         setLayoutParams(new RecyclerView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                ViewGroup.LayoutParams.MATCH_PARENT, (int)getResources().getDimension(R.dimen.container_height)));
         progressCon = new SimpleViewSwitcher(getContext());
         progressCon.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));

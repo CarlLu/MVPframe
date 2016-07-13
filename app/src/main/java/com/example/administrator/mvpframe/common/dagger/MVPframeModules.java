@@ -16,7 +16,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class MVPframeModel {
+public class MVPframeModules {
 
     @Singleton
     @Provides

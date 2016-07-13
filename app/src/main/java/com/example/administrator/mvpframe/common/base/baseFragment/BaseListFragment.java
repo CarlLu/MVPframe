@@ -89,9 +89,8 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
 
     @Override
     public void hasNoMoreDate() {
-        mRecyclerView.loadMoreComplete();
+        mRecyclerView.setNoMore(true);
         PAGE = PAGE - 1;
-        Toast.makeText(mContext, "没有更多数据", Toast.LENGTH_SHORT).show();
     }
 
     protected abstract void fitDates(BaseViewHolder helper, K item);
