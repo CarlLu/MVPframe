@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.example.administrator.mvpframe"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
