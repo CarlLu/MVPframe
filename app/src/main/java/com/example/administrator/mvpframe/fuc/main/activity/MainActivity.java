@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (mNoScrollViewPager.getCurrentItem() == 1) {
-            mNoScrollViewPager.setCurrentItem(0, true);
+            onBack();
         } else {
             super.onBackPressed();
         }

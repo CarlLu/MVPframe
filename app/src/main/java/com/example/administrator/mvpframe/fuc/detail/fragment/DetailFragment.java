@@ -39,7 +39,7 @@ public class DetailFragment extends BaseFragment {
 
     @Override
     protected void onBackClick() {
-        ((MainActivity)mContext).onBack();
+        ((MainActivity) mContext).onBack();
     }
 
     private void setWebSetting() {
@@ -84,8 +84,8 @@ public class DetailFragment extends BaseFragment {
                 });
     }
 
-    public void showWeb(String url){
-        if(mWebView == null){
+    public void showWeb(String url) {
+        if (mWebView == null) {
             mWebView = new WebView(mContext);
             setWebSetting();
             mDetailContent.addView(mWebView);
@@ -98,8 +98,8 @@ public class DetailFragment extends BaseFragment {
         return mDetailContent;
     }
 
-    public void clear(){
-        if(mWebView != null){
+    public void clear() {
+        if (mWebView != null) {
             mDetailContent.removeView(mWebView);
             mWebView.clearHistory();
             mWebView.clearCache(true);
