@@ -12,12 +12,4 @@
 
 
     </style>
-
-    <style name="small_ratingbarStyle">
-        <item name="android:isIndicator">true</item>
-        <item name="android:numStars">5</item>
-        <item name="android:progressDrawable">@drawable/small_ratingbar_style</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">16dip</item>
-    </style>
 </resources>

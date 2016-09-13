@@ -14,4 +14,6 @@
     <color name="holo_blue_bright">#ff00ddff</color>
     <color name="holo_green_light">#ff99cc00</color>
     <color name="holo_orange_light">#ffffbb33</color>
+    <color name="title_color">#333333</color>
+    <color name="hint_color">#979797</color>
 </resources>

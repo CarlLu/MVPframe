@@ -7,7 +7,6 @@ import com.example.administrator.mvpframe.R;
 import com.example.administrator.mvpframe.common.base.baseAdapter.BaseFragmentPagerAdapter;
 import com.example.administrator.mvpframe.common.widget.NoScrollViewPager;
 import com.example.administrator.mvpframe.fuc.detail.fragment.DetailFragment;
-import com.example.administrator.mvpframe.fuc.main.entity.TeacherEntity;
 import com.example.administrator.mvpframe.fuc.main.fragment.MainFragment;
 
 import butterknife.Bind;
@@ -39,13 +38,14 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.unbind(this);
     }
 
-    public void toDetail(TeacherEntity item) {
+    public void toDetail(String url) {
         mNoScrollViewPager.setCurrentItem(1,true);
-        mDetailFragment.upDate(item);
+        mDetailFragment.showWeb(url);
     }
 
     public void onBack(){
         mNoScrollViewPager.setCurrentItem(0,true);
+        mDetailFragment.clear();
     }
 
     @Override

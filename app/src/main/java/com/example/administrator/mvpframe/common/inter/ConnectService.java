@@ -1,32 +1,29 @@
 package com.example.administrator.mvpframe.common.inter;
 
-import com.example.administrator.mvpframe.fuc.detail.model.TeacherInfoEntity;
-import com.example.administrator.mvpframe.fuc.main.entity.EvaluateEntity;
-import com.example.administrator.mvpframe.fuc.main.entity.MainTeacherEntity;
-import com.example.administrator.mvpframe.fuc.main.entity.NewsEntity;
+import com.example.administrator.mvpframe.fuc.main.entity.JokeEntity;
+import com.example.administrator.mvpframe.fuc.main.entity.NewsTopEntity;
+import com.example.administrator.mvpframe.fuc.main.entity.WeiChatEntity;
 
 import java.util.Map;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 public interface ConnectService {
 
     @FormUrlEncoded
-    @POST("app/mechanism/findTeacher.do")
-    Observable<MainTeacherEntity> getTeacherList(@FieldMap Map<String,String> params);
+    @POST("toutiao/index")
+    Observable<NewsTopEntity> getNewTopList(@FieldMap Map<String,String> params);
+
+    @GET("http://japi.juhe.cn/joke/content/list.from")
+    Observable<JokeEntity> getJokeList(@QueryMap Map<String,String> params);
 
     @FormUrlEncoded
-    @POST("app/mechanism/findScore.do")
-    Observable<EvaluateEntity> getEvaluateList(@FieldMap Map<String,String> params);
+    @POST("weixin/query")
+    Observable<WeiChatEntity> getWeiChatList(@FieldMap Map<String,String> params);
 
-    @FormUrlEncoded
-    @POST("app/findMessage.do")
-    Observable<NewsEntity> getNewsList(@FieldMap Map<String,String> params);
-
-    @FormUrlEncoded
-    @POST("app/mechanism/getTeacher.do")
-    Observable<TeacherInfoEntity> getDetailContent(@FieldMap Map<String,String> params);
 }

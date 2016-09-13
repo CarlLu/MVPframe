@@ -41,17 +41,14 @@ public abstract class BaseListFragment<T extends BasePresenter, K> extends
         mPresenter.requestDate(getRequestParams(), BasePresenter.RequestMode.FRIST);
     }
 
+
     @Override
     protected void baseInitView() {
         mRecyclerView = (XRecyclerView) mRootView.findViewById(R.id.recycleView);
     }
 
     @Override
-    protected Map<String, String> getRequestParams() {
-        params.put("mechanismId", "1");
-        params.put("pageNum", PAGE + "");
-        return params;
-    }
+    protected abstract Map<String, String> getRequestParams();
 
     @Override
     protected View getLoadingTargetView() {

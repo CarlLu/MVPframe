@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="15dp"
+              android:paddingRight="15dp"
+              android:paddingTop="15dp"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_weiChat_title"
+        android:textSize="18sp"
+        android:textColor="@color/title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <ImageView
+        android:src="@mipmap/error_icon"
+        android:layout_marginTop="6dp"
+        android:id="@+id/iv_item_weiChat_icon"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/tv_item_weiChat_source"
+        android:textColor="@color/hint_color"
+        android:textSize="13sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#e8e8e8"/>
+</LinearLayout>

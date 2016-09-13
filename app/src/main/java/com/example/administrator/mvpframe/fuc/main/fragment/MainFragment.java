@@ -24,10 +24,10 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     protected void baseInit() {
-        setToolbar(false, "教师");
+        setToolbar(false, "新闻头条");
         mViewPager.setAdapter(new BaseFragmentPagerAdapter.Holder(getChildFragmentManager()).add(
-                new TeacherFragment()).add(new EvaluateFragment()).add(new MsgFragment()).build(
-                new String[]{"教师", "评论", "消息"}));
+                new NewsTopFragment()).add(new JokeFragment()).add(new WeiChatFragment()).build(
+                new String[]{"新闻头条", "笑话大全", "微信精选"}));
 
 
         mViewPager.addOnPageChangeListener(this);
@@ -48,11 +48,11 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onPageSelected(int position) {
         if (position == 0) {
-            changeTitle("教师");
+            changeTitle("新闻头条");
         } else if (position == 1) {
-            changeTitle("评论");
+            changeTitle("笑话大全");
         } else {
-            changeTitle("消息");
+            changeTitle("微信精选");
         }
     }
 
