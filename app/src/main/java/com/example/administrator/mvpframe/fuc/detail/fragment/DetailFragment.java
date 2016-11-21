@@ -6,6 +6,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.example.administrator.mvpframe.R;
 import com.example.administrator.mvpframe.common.base.baseFragment.BaseFragment;
@@ -19,10 +20,9 @@ import butterknife.Bind;
 
 public class DetailFragment extends BaseFragment {
 
-    @Bind(R.id.fl_detail_content)
-    FrameLayout mDetailContent;
+    @Bind(R.id.detail_rootView)
+    LinearLayout mRootView;
 
-    private Map<String, String> mParams;
     private WebView mWebView;
 
     @Override
@@ -33,13 +33,15 @@ public class DetailFragment extends BaseFragment {
     @Override
     protected void baseInit() {
         setToolbar(true, "详情");
-
-        mParams = new HashMap<>();
     }
 
     @Override
-    protected void onBackClick() {
-        ((MainActivity) mContext).onBack();
+    public void onBackClick() {
+        if(mWebView.canGoBack()){
+            mWebView.goBack();
+        }else{
+            ((MainActivity) mContext).onBack();
+        }
     }
 
     private void setWebSetting() {
@@ -88,19 +90,15 @@ public class DetailFragment extends BaseFragment {
         if (mWebView == null) {
             mWebView = new WebView(mContext);
             setWebSetting();
-            mDetailContent.addView(mWebView);
+            mRootView.addView(mWebView);
         }
         mWebView.loadUrl(url);
     }
 
-    @Override
-    protected View getLoadingTargetView() {
-        return mDetailContent;
-    }
 
     public void clear() {
         if (mWebView != null) {
-            mDetailContent.removeView(mWebView);
+            mRootView.removeView(mWebView);
             mWebView.clearHistory();
             mWebView.clearCache(true);
             mWebView.destroy();

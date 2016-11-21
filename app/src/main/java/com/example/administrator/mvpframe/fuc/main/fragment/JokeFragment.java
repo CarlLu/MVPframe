@@ -38,4 +38,5 @@ public class JokeFragment extends
     protected JokePresenter getChildPresenter() {
         return new JokePresenter(this);
     }
+
 }

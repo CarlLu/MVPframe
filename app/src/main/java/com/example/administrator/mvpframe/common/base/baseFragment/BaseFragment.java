@@ -3,6 +3,8 @@ package com.example.administrator.mvpframe.common.base.baseFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +14,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.administrator.mvpframe.R;
 import com.example.administrator.mvpframe.common.base.basePresenter.BasePresenter;
 import com.example.administrator.mvpframe.common.base.baseView.BaseView;
 import com.example.administrator.mvpframe.common.loading.VaryViewHelperController;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -44,6 +49,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         super.onAttach(context);
         this.mContext = (Activity) context;
     }
+
 
     @Nullable
     @Override

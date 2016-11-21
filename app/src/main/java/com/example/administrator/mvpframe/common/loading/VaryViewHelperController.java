@@ -1,11 +1,9 @@
 package com.example.administrator.mvpframe.common.loading;
 
 
-import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.mvpframe.R;
@@ -14,10 +12,6 @@ import com.example.administrator.mvpframe.R;
 public class VaryViewHelperController {
 
     private IVaryViewHelper helper;
-
-    private AnimationDrawable mDrawableAnim;
-
-    private ImageView mImageView;
 
     public VaryViewHelperController(View view) {
         this(new VaryViewHelper(view));
